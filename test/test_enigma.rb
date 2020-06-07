@@ -24,4 +24,9 @@ class EnigmaTest < Minitest::Test
     assert_equal "070620", enigma.date
   end
 
+  def test_key_generator
+    enigma = Enigma.new
+    assert_equal "0", enigma.key_generator[0]
+  end
+
 end
