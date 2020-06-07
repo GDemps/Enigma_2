@@ -18,4 +18,10 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, enigma.alphabet
   end
 
+  def test_date
+    enigma = Enigma.new
+    #add a stub here before submission
+    assert_equal "070620", enigma.date
+  end
+
 end
