@@ -18,4 +18,28 @@ class EnigmaTest < Minitest::Test
     assert_equal expected, enigma.alphabet
   end
 
+  def test_date_today
+    enigma = Enigma.new
+    #add a stub here before submission
+    assert_equal "080620", enigma.date_today
+  end
+
+  def test_rand_number
+    enigma = Enigma.new
+    assert_equal "0", enigma.rand_number[0]
+  end
+
+  def test_split_key
+    enigma = Enigma.new
+    assert_equal ['02', '27', '71', '15'], enigma.split_key("02715")
+  end
+
+  # def test_encrypt
+  #   enigma = Enigma.new
+  #   expected = { encryption: "keder ohulw",
+  #               key: "02715",
+  #               date: "040895" }
+  #   assert_equal expected, enigma.encrypt("hello world", "02715", "040895")
+  # end
+
 end
