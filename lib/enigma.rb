@@ -24,13 +24,28 @@ class Enigma
     (date.to_i ** 2).to_s.chars.last(4).map { |char| char.to_i }
   end
 
-  def create_shifts(key, date)
+  def shifts_date_and_key(key, date)
     split_key(key).zip(offsets(date)).map { |nums| nums.reduce(:+) }
   end
-  # def encrypt(message, key = key_generator, date = date_today)
-  #   message = message.downcase
-  #
-  # end
+
+  def split_message(message)
+    message.chars.each_slice(4).to_a
+  end
+
+  def encrypt(message, key, date)
+    encrypted = ""
+    shifts = shifts_date_and_key(key, date)
+    split_message(message).each do |chars|
+      require "pry"
+      binding.pry
+      chars.zip(shifts).each do |char, shift_value|
+        new_index = @alphabet.find_index(char) + shift_value
+        encrypted.concat(@alphabet[new_index])
+      end
+    end
+    encrypted
+  end
+
 
   # def shift
   #   a_key = key[0..1]

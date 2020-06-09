@@ -44,6 +44,14 @@ class EnigmaTest < Minitest::Test
     assert_equal [3, 27, 73, 20], enigma.shifts_date_and_key("02715", "040895")
   end
 
+  def test_split_message
+    enigma = Enigma.new
+    expected = [["h", "e", "l", "l"],
+                ["o", " ", "w", "o"],
+                ["r", "l", "d"]]
+    assert_equal expected, enigma.split_message("hello world")
+  end
+
   def test_encrypt
     enigma = Enigma.new
     expected = { encryption: "keder ohulw",
