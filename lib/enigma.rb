@@ -24,6 +24,9 @@ class Enigma
     (date.to_i ** 2).to_s.chars.last(4).map { |char| char.to_i }
   end
 
+  def create_shifts(key, date)
+    split_key(key).zip(offsets(date)).map { |nums| nums.reduce(:+) }
+  end
   # def encrypt(message, key = key_generator, date = date_today)
   #   message = message.downcase
   #
