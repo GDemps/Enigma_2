@@ -36,10 +36,8 @@ class Enigma
     encrypted = ""
     shifts = shifts_date_and_key(key, date)
     split_message(message).each do |chars|
-      require "pry"
-      binding.pry
       chars.zip(shifts).each do |char, shift_value|
-        new_index = @alphabet.find_index(char) + shift_value
+        new_index = (@alphabet.find_index(char) + shift_value) %27
         encrypted.concat(@alphabet[new_index])
       end
     end
