@@ -101,4 +101,16 @@ class EnigmaTest < Minitest::Test
      assert_equal expected, enigma.encrypt("hello world")
   end
 
+  def test_encrypt_with_characters_not_in_alphabet
+    enigma = Enigma.new
+    enigma.stubs(:date_today).returns("040895")
+    enigma.stubs(:rand_number).returns("02715")
+    expected = {
+      encryption: "keder ohulw!",
+      key: "02715",
+      date: "040895"
+    }
+    assert_equal expected, enigma.encrypt("Hello World!")
+  end
+
 end
