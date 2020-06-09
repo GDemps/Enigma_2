@@ -29,7 +29,9 @@ class Enigma
   end
 
   def split_message(message)
-    message.chars.each_slice(4).to_a
+    message.chars.each_slice(4).to_a.map do |chars|
+      chars.map { |char| char.downcase }
+    end
   end
 
   def encrypt(message, key = rand_number, date = date_today)
@@ -37,8 +39,12 @@ class Enigma
     shifts = shifts_date_and_key(key, date)
     split_message(message).each do |chars|
       chars.zip(shifts).each do |char, shift_value|
-        new_index = (@alphabet.find_index(char) + shift_value) %27
-        encrypted.concat(@alphabet[new_index])
+        if alphabet.include?(char)
+          new_index = (@alphabet.find_index(char) + shift_value) %27
+          encrypted.concat(@alphabet[new_index])
+        else
+          encrypted.concat(char)
+        end
       end
     end
     { encryption: encrypted, key: key, date: date }
@@ -49,8 +55,12 @@ class Enigma
     shifts = shifts_date_and_key(key, date)
     split_message(message).each do |chars|
       chars.zip(shifts).each do |char, shift_value|
-        new_index = (@alphabet.find_index(char) - shift_value) %27
-        decrypted.concat(@alphabet[new_index])
+        if alphabet.include?(char)
+          new_index = (@alphabet.find_index(char) - shift_value) %27
+          decrypted.concat(@alphabet[new_index])
+        else
+          decrypted.concat(char)
+        end
       end
     end
     { decryption: decrypted, key: key, date: date }
