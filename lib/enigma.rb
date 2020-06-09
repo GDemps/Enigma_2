@@ -24,28 +24,36 @@ class Enigma
     (date.to_i ** 2).to_s.chars.last(4).map { |char| char.to_i }
   end
 
-  def create_shifts(key, date)
+  def shifts_date_and_key(key, date)
     split_key(key).zip(offsets(date)).map { |nums| nums.reduce(:+) }
   end
-  # def encrypt(message, key = key_generator, date = date_today)
-  #   message = message.downcase
-  #
-  # end
 
-  # def shift
-  #   a_key = key[0..1]
-  #   b_key = key[1..2]
-  #   c_key = key[2..3]
-  #   d_key = key[3..4]
-  #   last4 = (date.to_i * date.to_i).to_s[-4..-1]
-  #   a_offset = last4[0]
-  #   b_offset = last4[1]
-  #   c_offset = last4[2]
-  #   d_offset = last4[3]
-  #   [a = a_key.to_i + a_offset.to_i,
-  #    b = b_key.to_i + b_offset.to_i,
-  #    c = c_key.to_i + c_offset.to_i,
-  #    d = d_key.to_i + d_offset.to_i]
-  # end
+  def split_message(message)
+    message.chars.each_slice(4).to_a
+  end
+
+  def encrypt(message, key = rand_number, date = date_today)
+    encrypted = ""
+    shifts = shifts_date_and_key(key, date)
+    split_message(message).each do |chars|
+      chars.zip(shifts).each do |char, shift_value|
+        new_index = (@alphabet.find_index(char) + shift_value) %27
+        encrypted.concat(@alphabet[new_index])
+      end
+    end
+    { encryption: encrypted, key: key, date: date }
+  end
+
+  def decrypt(message, key = rand_number, date = date_today)
+    decrypted = ""
+    shifts = shifts_date_and_key(key, date)
+    split_message(message).each do |chars|
+      chars.zip(shifts).each do |char, shift_value|
+        new_index = (@alphabet.find_index(char) - shift_value) %27
+        decrypted.concat(@alphabet[new_index])
+      end
+    end
+    { decryption: decrypted, key: key, date: date }
+  end
 
 end
