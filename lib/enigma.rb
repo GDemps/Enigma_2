@@ -17,11 +17,11 @@ class Enigma
   def split_key(key)
     key_array = []
     key.chars.each_cons(2){|chars| key_array << chars.join}
-    key_array
+    key_array.map { |char| char.to_i }
   end
 
   def offsets(date)
-    (date.to_i ** 2).to_s.chars.last(4)
+    (date.to_i ** 2).to_s.chars.last(4).map { |char| char.to_i }
   end
 
   # def encrypt(message, key = key_generator, date = date_today)

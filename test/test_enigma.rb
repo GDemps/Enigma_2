@@ -31,12 +31,12 @@ class EnigmaTest < Minitest::Test
 
   def test_split_key
     enigma = Enigma.new
-    assert_equal ['02', '27', '71', '15'], enigma.split_key("02715")
+    assert_equal [2, 27, 71, 15], enigma.split_key("02715")
   end
 
   def test_offsets
     enigma = Enigma.new
-    assert_equal ["1", "0", "2", "5"], enigma.offsets("040895")
+    assert_equal [1, 0, 2, 5], enigma.offsets("040895")
   end
 
   # def test_encrypt
