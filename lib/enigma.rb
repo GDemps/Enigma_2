@@ -44,4 +44,16 @@ class Enigma
     { encryption: encrypted, key: key, date: date }
   end
 
+  def decrypt(message, key = rand_number, date = date_today)
+    decrypted = ""
+    shifts = shifts_date_and_key(key, date)
+    split_message(message).each do |chars|
+      chars.zip(shifts).each do |char, shift_value|
+        new_index = (@alphabet.find_index(char) - shift_value) %27
+        decrypted.concat(@alphabet[new_index])
+      end
+    end
+    { decryption: decrypted, key: key, date: date }
+  end
+
 end
