@@ -21,8 +21,8 @@ class EnigmaTest < Minitest::Test
 
   def test_date_today
     enigma = Enigma.new
-    #add a stub here before submission
-    assert_equal "090620", enigma.date_today
+    enigma.stubs(:date_today).returns("040895")
+    assert_equal "040895", enigma.date_today
   end
 
   def test_rand_number
