@@ -20,6 +20,10 @@ class Enigma
     key_array
   end
 
+  def offsets(date)
+    (date.to_i ** 2).to_s.chars.last(4)
+  end
+
   # def encrypt(message, key = key_generator, date = date_today)
   #   message = message.downcase
   #

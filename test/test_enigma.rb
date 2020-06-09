@@ -34,6 +34,11 @@ class EnigmaTest < Minitest::Test
     assert_equal ['02', '27', '71', '15'], enigma.split_key("02715")
   end
 
+  def test_offsets
+    enigma = Enigma.new
+    assert_equal ["1", "0", "2", "5"], enigma.offsets("040895")
+  end
+
   # def test_encrypt
   #   enigma = Enigma.new
   #   expected = { encryption: "keder ohulw",
