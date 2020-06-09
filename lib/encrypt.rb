@@ -1,4 +1,3 @@
-require './test/test_helper'
 require './lib/enigma'
 
 handle = File.open(ARGV[0], "r")
