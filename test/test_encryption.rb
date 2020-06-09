@@ -7,33 +7,38 @@ require './lib/encryption'
 
 class EncryptionTest < Minitest::Test
 
+  def setup
+   @encryption = Encryption.new
+  end
+
+  def test_it_exists
+   assert_instance_of Encryption, @encryption
+  end
+
   def test_encrypt_with_key_and_date
-    enigma = Enigma.new
     expected = { encryption: "keder ohulw",
                 key: "02715",
                 date: "040895" }
-    assert_equal expected, enigma.encrypt("hello world", "02715", "040895")
+    assert_equal expected, @encryption.encrypt("hello world", "02715", "040895")
   end
 
   def test_encrypt_with_key_no_date
-    enigma = Enigma.new
     expected = { encryption: "keder ohulw",
                 key: "02715",
                 date: "040895" }
-    enigma.stubs(:date_today).returns("040895")
-    assert_equal expected, enigma.encrypt("hello world", "02715")
+    @encryption.stubs(:date_today).returns("040895")
+    assert_equal expected, @encryption.encrypt("hello world", "02715")
   end
 
   def test_encrypt_with_a_random_key_and_todays_date
-     enigma = Enigma.new
-     enigma.stubs(:date_today).returns("040895")
-     enigma.stubs(:rand_number).returns("02715")
+     @encryption.stubs(:date_today).returns("040895")
+     @encryption.stubs(:rand_number).returns("02715")
      expected = {
        encryption: "keder ohulw",
        key: "02715",
        date: "040895"
      }
-     assert_equal expected, enigma.encrypt("hello world")
+     assert_equal expected, @encryption.encrypt("hello world")
   end
 
 end
