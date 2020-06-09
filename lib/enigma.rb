@@ -21,8 +21,8 @@ class Enigma
    @encryption.encrypt(message, key, date)
   end
 
- def decrypt(encrypted_message, key, date = date_today)
+  def decrypt(encrypted_message, key, date = date_today)
    @decryption.decrypt(encrypted_message, key, date)
- end
+  end
 
 end
