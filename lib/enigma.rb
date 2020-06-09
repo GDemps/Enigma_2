@@ -10,7 +10,7 @@ class Enigma
   end
 
   def date_today
-    Time.now.strftime("%d%m%y")
+    Date.today.strftime(("%d%m%y"))
   end
 
   def rand_number
