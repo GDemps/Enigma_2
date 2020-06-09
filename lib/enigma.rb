@@ -32,7 +32,7 @@ class Enigma
     message.chars.each_slice(4).to_a
   end
 
-  def encrypt(message, key, date)
+  def encrypt(message, key = rand_number, date = date_today)
     encrypted = ""
     shifts = shifts_date_and_key(key, date)
     split_message(message).each do |chars|
