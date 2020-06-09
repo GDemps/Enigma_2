@@ -6,6 +6,8 @@ encrypted = handle.read
 handle.close
 
 enigma = Enigma.new
+require "pry"
+binding.pry
 decrypted = enigma.decrypt(encrypted, ARGV[2], ARGV[3])
 
 writer = File.open(ARGV[1], "w")
