@@ -35,6 +35,22 @@ class Enigma
   end
 
   def encrypt(message, key = rand_number, date = date_today)
+   {
+     encryption: encrypt_m(message, key, date),
+     key: key,
+     date: date
+   }
+  end
+
+  def decrypt(encrypted_message, key, date = date_today)
+   {
+     decryption: decrypt_m(encrypted_message, key, date),
+     key: key,
+     date: date
+   }
+  end
+
+  def encrypt_m(message, key = rand_number, date = date_today)
     encrypted = ""
     shifts = shifts_date_and_key(key, date)
     split_message(message).each do |chars|
@@ -47,10 +63,10 @@ class Enigma
         end
       end
     end
-    { encryption: encrypted, key: key, date: date }
+    encrypted
   end
 
-  def decrypt(message, key = rand_number, date = date_today)
+  def decrypt_m(message, key = rand_number, date = date_today)
     decrypted = ""
     shifts = shifts_date_and_key(key, date)
     split_message(message).each do |chars|
@@ -63,7 +79,7 @@ class Enigma
         end
       end
     end
-    { decryption: decrypted, key: key, date: date }
+    decrypted
   end
 
 end
