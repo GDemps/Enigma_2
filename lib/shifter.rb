@@ -6,14 +6,6 @@ class Shifter
     @alphabet = ("a".."z").to_a << " "
   end
 
-  def date_today
-    Time.now.strftime("%d%m%y")
-  end
-
-  def rand_number
-    4.times.map { (0..9).to_a.sample }.join.rjust(5, "0")
-  end
-
   def split_key(key)
     key_array = []
     key.chars.each_cons(2){|chars| key_array << chars.join}
@@ -33,9 +25,5 @@ class Shifter
       chars.map { |char| char.downcase }
     end
   end
-
- #  def shift_amount(encrypted_char, end_char)
- #   (@alphabet.find_index(encrypted_char) - @alphabet.find_index(end_char)) % 27
- #  end
 
 end
