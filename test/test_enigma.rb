@@ -1,6 +1,7 @@
 require 'simplecov'
 SimpleCov.start
 require 'minitest/autorun'
+require 'mocha/minitest'
 require './lib/enigma'
 
 class EnigmaTest < Minitest::Test
@@ -66,6 +67,15 @@ class EnigmaTest < Minitest::Test
                  key: "02715",
                  date: "040895" }
     assert_equal expected, enigma.decrypt("keder ohulw", "02715", "040895")
+  end
+
+  def test_encrypt_with_key_no_date
+    enigma = Enigma.new
+    expected = { encryption: "keder ohulw",
+                key: "02715",
+                date: "040895" }
+    enigma.stubs(:date_today).returns("040895")
+    assert_equal expected, enigma.encrypt("hello world", "02715")
   end
 
 end
