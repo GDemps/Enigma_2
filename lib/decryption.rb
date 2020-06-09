@@ -1,6 +1,6 @@
 require_relative "shifter"
 
-class Encryption < Shifter
+class Decryption < Shifter
 
   def decrypt(encrypted_message, key, date = date_today)
     {
